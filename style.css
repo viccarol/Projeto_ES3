@@ -7,6 +7,7 @@
 
 body{
   overflow-x:hidden;
+  background-color: #ccc;
 }
 
 .grid_nav{
@@ -35,26 +36,27 @@ nav img{
 }
 
 .nav_btn{
-    height: 40px;
+    height: 100px;
     width: 100px;
     font-size: 16px;
     font-weight: 600;
-    color: var(--color-font-light);
-    background-color: var(--color-font-heavy);
+    color: #2E8B57;
+    background-color: #A9A9A9;
     border: none;
     cursor: pointer;
-    border-radius: 100%;
+    border-radius: 360%;
     box-shadow: var(--boxShadow-buttons);
 }
 
 .nav_btn:hover{
-    background-color: var(--color-button-hover);
-    color: var(--color-font-heavy);
+    background-color: #2E8B57;
+    color: #A9A9A9;
+    transition: 0.5s;
 }
 
 .nav_btn.active{
-    background-color: var(--color-button-active);
-    color: var(--color-font-heavy);
+    background-color: #2E8B57;
+    color: #2E8B57;
     box-shadow: var(--boxShadow-buttons-active);
     cursor: pointer;
 }
@@ -160,6 +162,14 @@ nav img{
  background-color: white;
 }
 
+.navega{
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-font-light);
+    text-shadow: var(--textShadow);
+    text-align: center;
+}
+
 .headlines{
     display: flex;
     justify-content: center;
@@ -174,6 +184,13 @@ nav img{
     font-size: 36px;
     font-weight: 800;
     color: var(--color-font-light);
+    text-shadow: var(--textShadow);
+}
+
+.sustentabilidade{
+    font-size: 60px;
+    font-weight: 800;
+    color: #2E8B57;
     text-shadow: var(--textShadow);
 }
 
@@ -367,8 +384,8 @@ textarea:focus{
   background: #fff;
   text-align: center;
   border-radius: 10px;
-  color: #F1A48A;
-  text-shadow: #F1A48A;
+  color: #2E8B57;
+  text-shadow: #2E8B57;
 
   display: flex;
   flex-direction: row;
@@ -401,7 +418,8 @@ textarea:focus{
   text-align: left;
   font-size: 20px;
   font-weight: 50;
-  color: #F1A48A;
+  color: black;
+  font-weight: bolder;
   font-family: 'Inter', sans-serif;
 }
 .form-outer form .page .field{
@@ -446,7 +464,7 @@ form .page .field button{
   transition: 0.5s ease;
 }
 form .page .field button:hover{
-  background: #F1A48A;
+  background: #2E8B57;
 }
 form .page .btns button{
   margin-top: -20px!important;
@@ -491,8 +509,8 @@ form .page .btns button.next{
   line-height: 25px;
 }
 .progress-bar .step .bullet.active{
-  border-color: #F1A48A;
-  background: #F1A48A;
+  border-color: #2E8B57;
+  background: #2E8B57;
 }
 .progress-bar .step .bullet span{
   position: absolute;
@@ -513,7 +531,7 @@ form .page .btns button.next{
   background: #262626;
 }
 .progress-bar .step .bullet.active:after{
-  background: #F1A48A;
+  background: #2E8B57;
   transform: scaleX(0);
   transform-origin: left;
   animation: animate 0.3s linear forwards;
@@ -528,7 +546,7 @@ form .page .btns button.next{
   display: none;
 }
 .progress-bar .step p.active{
-  color: #F1A48A;
+  color: #2E8B57;
   transition: 0.2s linear;
 }
 .progress-bar .step .check{
