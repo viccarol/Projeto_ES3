@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fóruns de Discussão</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        section {
+            margin-top: 20px;
+        }
+
+        article {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Fóruns de Discussão</h1>
+    </header>
+
+    <section id="forum-list">
+        <!-- Lista de Fóruns de Discussão -->
+        <article>
+            <h2><a href="#" onclick="showForum('forum-2')">Fórum</a></h2>
+            <p>Selecione o fórum acima</p>
+        </article>
+    </section>
+
+    <section id="forum-view" style="display: none;">
+        <!-- Visualização de Fórum -->
+        <h2 id="forum-title">Título do Fórum</h2>
+        <p id="forum-description">Descrição do Fórum...</p>
+
+        <!-- Tópicos do Fórum -->
+        <div id="forum-topics">
+            <!-- Tópicos serão adicionados dinamicamente aqui -->
+        </div>
+
+        <!-- Formulário para Adicionar Tópico -->
+        <form id="add-topic-form">
+            <label for="topic-title">Título:</label>
+            <input type="text" id="topic-title" name="topic-title" required>
+
+            <label for="topic-content">Conteúdo:</label>
+            <textarea id="topic-content" name="topic-content" rows="4" required></textarea>
+
+            <button type="submit">Adicionar publicação</button>
+        </form>
+
+        <!-- Seção para mostrar/comentar publicações -->
+        <div id="topic-comments-section" style="display: none;">
+            <h3>Comentários</h3>
+            <ul id="topic-comments-list">
+                <!-- Comentários serão adicionados dinamicamente aqui -->
+            </ul>
+            <form id="add-comment-form">
+                <label for="comment-content">Comentário:</label>
+                <textarea id="comment-content" name="comment-content" rows="3" required></textarea>
+                <button type="submit">Adicionar Comentário</button>
+            </form>
+        </div>
+
+    </section>
+
+    <script>
+        // Simulação de dados (para fins de exemplo)
+        const forumData = {
+            'forum-1': {
+                title: 'PUBLICAÇÕES',
+                description: '',
+                topics: [
+                    { title: '', content: '', comments: [] },
+                    { title: '', content: '', comments: [] }
+                    // Adicione mais tópicos conforme necessário
+                ]
+            },
+            'forum-2': {
+                title: 'PUBLICAÇÕES',
+                description: '',
+                topics: [
+                    // Adicione mais tópicos conforme necessário
+                ]
+            }
+        };
+
+        // Função para exibir um fórum
+        function showForum(forumId) {
+            const forum = forumData[forumId];
+
+            // Oculta a lista de fóruns
+            document.getElementById('forum-list').style.display = 'none';
+
+            // Exibe a visualização do fórum
+            document.getElementById('forum-view').style.display = 'block';
+
+            // Atualiza o título e descrição do fórum
+            document.getElementById('forum-title').innerText = forum.title;
+            document.getElementById('forum-description').innerText = forum.description;
+
+            // Adiciona os tópicos ao fórum
+            const topicsContainer = document.getElementById('forum-topics');
+            topicsContainer.innerHTML = ''; // Limpa o conteúdo existente
+
+            forum.topics.forEach((topic, index) => {
+                const topicElement = document.createElement('article');
+                topicElement.innerHTML = `<h3>${topic.title}</h3><p>${topic.content}</p><button onclick="showComments(${index})">Ver Comentários</button>`;
+                topicsContainer.appendChild(topicElement);
+            });
+
+            // Adiciona o manipulador de eventos ao formulário do tópico
+            document.getElementById('add-topic-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Simulação de adição de um novo tópico (realizará o armazenamento no backend)
+                const newTopic = {
+                    title: document.getElementById('topic-title').value,
+                    content: document.getElementById('topic-content').value,
+                    comments: [] // Inicializa a lista de comentários
+                };
+
+                // Adiciona o novo tópico à lista de tópicos do fórum
+                forum.topics.push(newTopic);
+
+                // Atualiza a exibição dos tópicos
+                const newTopicElement = document.createElement('article');
+                newTopicElement.innerHTML = `<h3>${newTopic.title}</h3><p>${newTopic.content}</p><button onclick="showComments(${forum.topics.length - 1})">Ver Comentários</button>`;
+                topicsContainer.appendChild(newTopicElement);
+
+                // Limpa os campos do formulário
+                document.getElementById('topic-title').value = '';
+                document.getElementById('topic-content').value = '';
+
+                alert('Publicação adicionada com sucesso!');
+            });
+        }
+
+        // Função para exibir comentários de um tópico
+        function showComments(topicIndex) {
+            const forum = forumData['forum-2']; // Substitua pelo fórum específico se necessário
+            const topic = forum.topics[topicIndex];
+
+            // Exibe a seção de comentários
+            const commentsSection = document.getElementById('topic-comments-section');
+            commentsSection.style.display = 'block';
+
+            // Atualiza a lista de comentários
+            const commentsList = document.getElementById('topic-comments-list');
+            commentsList.innerHTML = ''; // Limpa o conteúdo existente
+
+            topic.comments.forEach((comment, index) => {
+                const commentElement = document.createElement('li');
+                commentElement.innerHTML = `<p>${comment}</p><button onclick="deleteComment(${topicIndex}, ${index})">Excluir</button>`;
+                commentsList.appendChild(commentElement);
+            });
+
+            // Adiciona o manipulador de eventos ao formulário de comentário
+            document.getElementById('add-comment-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Simulação de adição de um novo comentário
+                const newComment = document.getElementById('comment-content').value;
+
+                // Adiciona o novo comentário à lista de comentários do tópico
+                topic.comments.push(newComment);
+
+                // Atualiza a lista de comentários
+                const newCommentElement = document.createElement('li');
+                newCommentElement.innerHTML = `<p>${newComment}</p><button onclick="deleteComment(${topicIndex}, ${topic.comments.length - 1})">Excluir</button>`;
+                commentsList.appendChild(newCommentElement);
+
+                // Limpa o campo do formulário
+                document.getElementById('comment-content').value = '';
+
+                alert('Comentário adicionado com sucesso!');
+            });
+        }
+
+        // Função para excluir um comentário
+        function deleteComment(topicIndex, commentIndex) {
+            const forum = forumData['forum-2']; // Substitua pelo fórum específico se necessário
+            const topic = forum.topics[topicIndex];
+
+            // Remove o comentário da lista
+            topic.comments.splice(commentIndex, 1);
+
+            // Atualiza a lista de comentários
+            showComments(topicIndex);
+
+            alert('Comentário excluído com sucesso!');
+        }
+
+        // Adiciona manipuladores de eventos aos links dos fóruns
+        document.querySelectorAll('#forum-list a').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const forumId = this.getAttribute('href').substring(1);
+                showForum(forumId);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
